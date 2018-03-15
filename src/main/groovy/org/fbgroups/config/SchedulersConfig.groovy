@@ -18,7 +18,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar
 @EnableScheduling
 class SchedulersConfig implements SchedulingConfigurer {
 
-    private static final long ONE_HOUR = 60 * 60 * 1000L
+    private static final long PERIOD = 60 * 1*  1000L
 
     @Autowired
     UserProfileRepository repo
@@ -42,6 +42,6 @@ class SchedulersConfig implements SchedulingConfigurer {
 
     @Override
     void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-        taskRegistrar.addFixedRateTask(startDownloads, ONE_HOUR)
+        taskRegistrar.addFixedRateTask(startDownloads, PERIOD)
     }
 }

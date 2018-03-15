@@ -25,7 +25,7 @@ public class MainController {
     @RequestMapping("/")
     public String home(HttpServletRequest request, Principal currentUser, Model model) {
         util.setModel(request, currentUser, model);
-        util.printGroups(currentUser, request);
+        //util.printGroups(currentUser, request);
         return "redirect:index.html";
     }
 
