@@ -1,19 +1,21 @@
 buildscript {
     repositories {
-		mavenLocal()
-    	mavenCentral()
-		maven {
-			url "http://repo.spring.io/milestone"
-		}
+        maven { url "https://repo.spring.io/libs-milestone" }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
     }
+}
+
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/libs-milestone" }
 }
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
 
@@ -34,22 +36,21 @@ repositories {
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
+	//compile("org.springframework.boot:spring-boot-starter-web")
+    //compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.social:spring-social-security")
-    compile("org.springframework.social:spring-social-config")
-    compile("org.springframework.social:spring-social-facebook:2.0.3.RELEASE")
+    compile("org.springframework.social:spring-social-facebook")
     compile("org.apache.commons:commons-lang3:3.3.2")
     compile("com.google.guava:guava:14.0.1")
 
+
     compile 'net.sourceforge.htmlcleaner:htmlcleaner:2.15'
 
-    compile 'org.webjars:angularjs:1.4.6'
     compile 'org.webjars:bootstrap:3.3.5'
-    compile 'org.webjars:momentjs:2.10.6'
+    compile group: 'org.webjars', name: 'jquery', version: '3.2.1'
     compile 'commons-dbcp:commons-dbcp:1.4'
     compile "org.apache.lucene:lucene-core:5.3.1"
     compile "org.apache.lucene:lucene-analyzers-common:5.3.1"
@@ -58,10 +59,10 @@ dependencies {
 
 
 
-    compile "org.springframework.boot:spring-boot-starter-tomcat"
-
     testCompile 'org.springframework:spring-test'
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.3'
+    // https://mvnrepository.com/artifact/org.spockframework/spock-core
+    //testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+
 
 
     compile 'mysql:mysql-connector-java:5.1.31'
@@ -73,5 +74,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '4.6'
 }

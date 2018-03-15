@@ -14,18 +14,12 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 
-        <style type="text/css">
-            <!--
-            .ml { width: 110px; color: white; text-decoration: none }
-            .ml:hover, a:focus { color: white; text-decoration: none }
-            -->
-        </style>
+
 
     </head>
 
     <body>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" />
+
 
         <div class="container">
             <h2>Login page</h2>
@@ -42,8 +36,16 @@
             <p><button  type="submit" class="ml btn btn-block btn-social btn-sm btn-facebook">"Facebook"</button></p>
             </form>-->
 
-            <div th:include="fragments/exception :: errorInfo"/>
+            <div th:include="fragments/exception :: errorInfo"></div>
+
+
+            <form action="/signin/facebook" method="POST">
+                <input type="hidden" name="scope" value="public_profile" />
+                <input type="submit" value="Login using Facebook"/>
+            </form>
 
         </div><!-- /.container -->
+        <script src="/webjars/jquery/3.2.1/jquery.js" />
+        <script src="/webjars/bootstrap/3.3.5/js/bootstrap.js" />
     </body>
 </html>

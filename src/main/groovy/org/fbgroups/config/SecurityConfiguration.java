@@ -17,7 +17,6 @@ import javax.sql.DataSource;
  * Created by magnus on 18/08/14.
  */
 @Configuration
-@EnableWebMvcSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -46,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
         .and()
             .authorizeRequests()
-                .antMatchers("/favicon.ico", "/static-resources/**").permitAll()
+                .antMatchers("/login*","/signin/**","/signup/**","/favicon.ico", "/css/**","/webjars/**","/static-resources/**","/connect/**").permitAll()
                 .antMatchers("/**").authenticated()
         .and()
             .rememberMe()

@@ -45,7 +45,7 @@ public class AccountConnectionSignUpService implements ConnectionSignUp {
         String userId = profile.getId();
 
         usersDao.createUser(userId, new UserProfile(userId, profile));
-        startDownloads.downloadForUser(userRepository.findOne(userId)); // should be async
+        startDownloads.downloadForUser(userRepository.getOne(userId)); // should be async
         return userId;
     }
 }

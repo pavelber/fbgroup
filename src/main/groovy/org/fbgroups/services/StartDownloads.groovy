@@ -6,7 +6,6 @@ import org.fbgroups.entity.User
 import org.fbgroups.entity.UserRepository
 import org.fbgroups.entity.UserStatus
 import org.fbgroups.lucene.FBPost
-import org.fbgroups.lucene.IIndexer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,9 +29,6 @@ class StartDownloads implements IStartDownloads, Runnable {
     @Autowired
     UserRepository userRepository;
 
-
-    @Autowired
-    IIndexer indexer;
 
 
     @Override
@@ -118,7 +114,7 @@ class StartDownloads implements IStartDownloads, Runnable {
         return posts.each { p ->
 
             String url = "https://www.facebook.com/" + p.id.replace("_", "/posts/")
-            indexer.add(new FBPost(name: p.name,
+            (new FBPost(name: p.name,
                     message: p.message,
                     description: p.description,
                     caption: p.caption,

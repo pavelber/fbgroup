@@ -1,10 +1,7 @@
 package org.fbgroups.config
 
 import org.fbgroups.entity.UserProfileRepository
-import org.fbgroups.lucene.LuceneIndexer
 import org.fbgroups.services.IStartDownloads
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
@@ -29,8 +26,6 @@ class SchedulersConfig implements SchedulingConfigurer {
     @Autowired
     ApplicationContext factory
 
-    @Autowired
-    LuceneIndexer indexer
 
     @Autowired
     IStartDownloads startDownloads

@@ -127,7 +127,7 @@ public class SocialControllerUtil {
 
         // Reload from persistence storage if not set or invalid (i.e. no valid userId)
         if (profile == null || !userId.equals(profile.getUserid())) {
-            profile = userProfileRepository.findOne(userId);
+            profile = userProfileRepository.getOne(userId);
             session.setAttribute(USER_PROFILE, profile);
         }
         return profile;
@@ -146,7 +146,7 @@ public class SocialControllerUtil {
 
         // Reload from persistence storage if not set or invalid (i.e. no valid userId)
         if (connection == null || !userId.equals(connection.getUserid())) {
-            connection = userConnectionRepository.findOne(userId);
+            connection = userConnectionRepository.getOne(userId);
             session.setAttribute(USER_CONNECTION, connection);
         }
         return connection;
