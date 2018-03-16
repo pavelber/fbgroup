@@ -17,17 +17,8 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
-
     @Autowired
     private SocialControllerUtil util;
-
-    @RequestMapping("/")
-    public String home(HttpServletRequest request, Principal currentUser, Model model) {
-        util.setModel(request, currentUser, model);
-        //util.printGroups(currentUser, request);
-        return "redirect:index.html";
-    }
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Principal currentUser, Model model) {

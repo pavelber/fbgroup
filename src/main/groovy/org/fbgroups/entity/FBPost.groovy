@@ -1,4 +1,4 @@
-package org.fbgroups.lucene
+package org.fbgroups.entity
 
 import org.fbgroups.IndexedType;
 

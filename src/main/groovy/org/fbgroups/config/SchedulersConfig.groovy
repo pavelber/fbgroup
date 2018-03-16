@@ -18,7 +18,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar
 @EnableScheduling
 class SchedulersConfig implements SchedulingConfigurer {
 
-    private static final long PERIOD = 60 * 1*  1000L
+    private static final long PERIOD = 60 * 60 *  1000L
 
     @Autowired
     UserProfileRepository repo

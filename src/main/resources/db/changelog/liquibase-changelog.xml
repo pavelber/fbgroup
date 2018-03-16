@@ -72,4 +72,16 @@
             <column name="authority" type="varchar(255)"/>
         </createTable>
     </changeSet>
+    <changeSet id="create fbgroup" author="Pavel">
+
+        <createTable tableName="fbgroup">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="last_check" type="timestamp"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
