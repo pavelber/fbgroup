@@ -1,6 +1,12 @@
-fbsearch
+fbgroup
 ====================================
 
-Search in the own FB posts
-FB related code taken from 
-http://callistaenterprise.se/blogg/teknik/2014/09/02/adding-social-login-to-a-website-using-spring-social/
+Bot for FB groups, searches for duplicates posts
+You need to put in your home dir (${user.home}/properties/fbgroup.properties) a property file with FB app id and secret:
+
+
+spring.social.facebook.appId=
+spring.social.facebook.appSecret=
+
+
+Requires mysql db with db name fb, user fb/fb on localhost
