@@ -84,4 +84,15 @@
             <column name="last_check" type="timestamp"/>
         </createTable>
     </changeSet>
+    <changeSet id="create content hash table" author="Pavel">
+        <createTable tableName="content_hash">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="timestamp" type="timestamp"/>
+            <column name="group_id" type="varchar(255)"/>
+            <column name="hash" type="bigint"/>
+            <column name="link" type="varchar(512)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

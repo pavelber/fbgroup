@@ -9,20 +9,20 @@ import org.springframework.stereotype.Service
 class UsersDao {
 
     @Autowired
-    var authorityRepository: AuthorityRepository? = null
+    lateinit var authorityRepository: AuthorityRepository
 
     @Autowired
-    var userRepository: UserRepository? = null
+    lateinit var userRepository: UserRepository
 
     @Autowired
-    var userProfileRepository: UserProfileRepository? = null
+    lateinit var userProfileRepository: UserProfileRepository
 
 
     fun createUser(userId: String, profile: UserProfile) {
 
-        userRepository!!.save(User(userId, RandomStringUtils.randomAlphanumeric(8), true))
-        authorityRepository!!.save(Authority(userId, "USER"))
-        userProfileRepository!!.save(UserProfile(userId, profile.name,
+        userRepository.save(User(userId, RandomStringUtils.randomAlphanumeric(8), true))
+        authorityRepository.save(Authority(userId, "USER"))
+        userProfileRepository.save(UserProfile(userId, profile.name,
                 profile.firstname, profile.lastname,
                 profile.email, profile.username
         ))

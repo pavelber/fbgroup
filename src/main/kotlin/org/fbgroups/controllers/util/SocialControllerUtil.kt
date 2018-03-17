@@ -23,14 +23,7 @@ class SocialControllerUtil {
     lateinit var userConnectionRepository: UserConnectionRepository
 
     @Autowired
-    lateinit var springConnectionRepo: org.springframework.social.connect.UsersConnectionRepository
-
-    @Autowired
     lateinit var userProfileRepository: UserProfileRepository
-
-
-    @Autowired
-    lateinit var usersDao: UsersDao
 
     fun setModel(request: HttpServletRequest, currentUser: Principal?, model: Model) {
 
@@ -66,38 +59,6 @@ class SocialControllerUtil {
         model.addAttribute("currentUserProfile", profile)
         model.addAttribute("currentUserConnection", connection)
         model.addAttribute("currentUserDisplayName", displayName)
-
-        if (LOG.isDebugEnabled) {
-            logInfo(request, model, userId, path, session)
-        }
-    }
-
-    protected fun logInfo(request: HttpServletRequest, model: Model, userId: String?, path: String, session: HttpSession) {
-        // Log the content of the model
-        LOG.debug("Path: $path, currentUserId: $userId")
-
-        LOG.debug("Non-null request-attributes:")
-        val rane = request.attributeNames
-        while (rane.hasMoreElements()) {
-            val key = rane.nextElement()
-            val value = session.getAttribute(key)
-            if (value != null) {
-                LOG.debug(" - $key = $value")
-            }
-        }
-
-        LOG.debug("Session-attributes:")
-        val sane = session.attributeNames
-        while (sane.hasMoreElements()) {
-            val key = sane.nextElement()
-            LOG.debug(" - " + key + " = " + session.getAttribute(key))
-        }
-
-        val me = model.asMap().entries
-        LOG.debug("ModelElements (" + me.size + "):")
-        for ((key, value) in me) {
-            LOG.debug(" - $key = $value")
-        }
     }
 
     /**
@@ -148,10 +109,8 @@ class SocialControllerUtil {
 
     companion object {
 
-        private val LOG = LoggerFactory.getLogger(SocialControllerUtil::class.java)
-
-        private val USER_CONNECTION = "MY_USER_CONNECTION"
-        private val USER_PROFILE = "MY_USER_PROFILE"
+       private const val USER_CONNECTION = "MY_USER_CONNECTION"
+        private const val USER_PROFILE = "MY_USER_PROFILE"
     }
 
 }

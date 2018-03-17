@@ -22,7 +22,7 @@ class SchedulerConfig : SchedulingConfigurer {
 
 
     @Bean
-    public open fun taskScheduler(): ThreadPoolTaskScheduler {
+    fun taskScheduler(): ThreadPoolTaskScheduler {
         val scheduler = ThreadPoolTaskScheduler()
         scheduler.poolSize = 20
         scheduler.threadNamePrefix = "task-"
@@ -37,6 +37,6 @@ class SchedulerConfig : SchedulingConfigurer {
 
     companion object {
 
-        private val PERIOD = 60 * 60 * 1000L
+        private val PERIOD = 60 * 1 * 1000L
     }
 }

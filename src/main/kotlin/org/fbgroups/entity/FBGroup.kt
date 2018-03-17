@@ -23,7 +23,7 @@ data class FBGroup(@Id val id:String, val userId:String, val name:String, @Tempo
     }
 
     companion object {
-        val NOT_CHECKED_YET_DATE = SimpleDateFormat("YYYY").parse("2000")
+        private val NOT_CHECKED_YET_DATE = SimpleDateFormat("YYYY").parse("2000")!!
         fun fromGroup(group: Group, userId: String, status: FBGroupStatus = FBGroupStatus.NONCHECKED): FBGroup {
             return FBGroup(group.id,userId, group.name, NOT_CHECKED_YET_DATE, status)
         }
