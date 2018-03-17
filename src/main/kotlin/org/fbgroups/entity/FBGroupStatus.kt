@@ -1,5 +1,5 @@
 package org.fbgroups.entity
 
 enum class FBGroupStatus {
-    CHECKED, NONCHECKED, REMOVED, ERROR
+    CHECKED, NONCHECKED, REMOVED, ERROR, TAKEN
 }

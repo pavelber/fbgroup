@@ -8,6 +8,7 @@ import org.fbgroups.services.FbApiProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.facebook.api.Group
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 import java.util.*
@@ -19,23 +20,38 @@ internal class GroupsController {
     lateinit var repo: FBGroupsRepository
 
     @Autowired
-    var apiProvider: FbApiProvider? = null
+    lateinit var apiProvider: FbApiProvider
 
     @RequestMapping("/groups")
     fun getGroups(currentUser: Principal): List<FBGroup> {
-        val api = apiProvider!!.getAPI(currentUser.name)
+        val api = apiProvider.getAPI(currentUser.name)
         val userId = api.userOperations().userProfile.id
 
         val stored = repo.findByUserId(userId).toSet()
         val real = api.fetchConnections("me", "groups", Group::class.java).map { g -> FBGroup.fromGroup(g, userId) }.toSet()
         val ids = real.map({ it.id })
-        val sameIds = repo.findAll(ids).filter { it.userId != userId && it.status == FBGroupStatus.CHECKED }.toSet()
+        val taken = repo.findAll(ids).filter { it.userId != userId && it.status == FBGroupStatus.CHECKED }.toSet()
 
+        val removed = stored.filter { it !in real }
+        val realWithStatuses = real.map{ g ->
+            when (g) {
+                in taken -> g.copy(status = FBGroupStatus.TAKEN)
+                in stored -> g.copy(status = FBGroupStatus.CHECKED)
+                else -> g
+            }
+        }
 
+        return realWithStatuses+removed
+    }
 
-
-
-        return Arrays.asList(FBGroup("1", "111", "group a", Date(), FBGroupStatus.CHECKED),
-                FBGroup("2", "222", "group B", Date(), FBGroupStatus.NONCHECKED))
+    @RequestMapping("/group"    )
+    fun changeGroupStatus(id:String, manage:Boolean,currentUser: Principal ) {
+        if (manage) {
+            val api = apiProvider.getAPI(currentUser.name)
+            val userId = api.userOperations().userProfile.id
+            val group = api.fetchConnections("me", "groups", Group::class.java).
+                    map { g -> FBGroup.fromGroup(g, userId, FBGroupStatus.CHECKED) }.filter{it.id == id}.first()
+            repo.save(group)
+        } else repo.delete(id)
     }
 }
