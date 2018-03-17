@@ -20,7 +20,7 @@ import javax.sql.DataSource
  */
 @Configuration
 @EnableSocial
-open class SocialConfig : SocialConfigurer {
+class SocialConfig : SocialConfigurer {
 
     @Autowired
     lateinit var dataSource: DataSource

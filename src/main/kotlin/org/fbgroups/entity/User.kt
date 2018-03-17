@@ -10,6 +10,6 @@ import javax.persistence.Table
 @Entity
 @Table(name = "users")
 class User(@Id
-           val username: String="",
-           val password: String="",
-           val enabled: Boolean = false)
+           val username: String,
+           val password: String,
+           val enabled: Boolean)

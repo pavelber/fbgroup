@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableAsync
 @EnableJpaRepositories(basePackages = arrayOf("org.fbgroups.entity"))
 @EnableAsync
 @PropertySources(PropertySource("classpath:application.properties"), PropertySource("file:\${user.home}/properties/fbgroup.properties"))
-open class Application
+class Application
 
 fun main(args: Array<String>) {
     SpringApplication.run(Application::class.java, *args)

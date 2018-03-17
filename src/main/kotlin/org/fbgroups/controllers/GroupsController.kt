@@ -25,10 +25,13 @@ internal class GroupsController {
     fun getGroups(currentUser: Principal): List<FBGroup> {
         val api = apiProvider!!.getAPI(currentUser.name)
         val userId = api.userOperations().userProfile.id
-        val stored = repo.findByUserId(userId)
-        val real = api.fetchConnections("me", "groups", Group::class.java).map { g -> FBGroup.fromGroup(g, userId) }
+
+        val stored = repo.findByUserId(userId).toSet()
+        val real = api.fetchConnections("me", "groups", Group::class.java).map { g -> FBGroup.fromGroup(g, userId) }.toSet()
         val ids = real.map({ it.id })
-        val sameIds = repo.findAll(ids).filter { it.userId != userId && it.status == FBGroupStatus.CHECKED }
+        val sameIds = repo.findAll(ids).filter { it.userId != userId && it.status == FBGroupStatus.CHECKED }.toSet()
+
+
 
 
 

@@ -15,7 +15,7 @@ import javax.sql.DataSource
  * Created by magnus on 18/08/14.
  */
 @Configuration
-open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
+class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     @Autowired
     lateinit var dataSource: DataSource

@@ -14,7 +14,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar
  */
 @Configuration
 @EnableScheduling
-open class SchedulerConfig : SchedulingConfigurer {
+class SchedulerConfig : SchedulingConfigurer {
 
 
     @Autowired
