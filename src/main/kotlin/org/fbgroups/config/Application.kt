@@ -9,13 +9,10 @@ import org.springframework.context.annotation.PropertySources
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.scheduling.annotation.EnableAsync
 
-/**
- * Created by magnus on 18/08/14.
- */
 @SpringBootApplication
-@ComponentScan(basePackages = arrayOf("org.fbgroups"))
-@EntityScan(basePackages = arrayOf("org.fbgroups"))
-@EnableJpaRepositories(basePackages = arrayOf("org.fbgroups.entity"))
+@ComponentScan(basePackages = ["org.fbgroups"])
+@EntityScan(basePackages = ["org.fbgroups"])
+@EnableJpaRepositories(basePackages = ["org.fbgroups.entity"])
 @EnableAsync
 @PropertySources(PropertySource("classpath:application.properties"), PropertySource("file:\${user.home}/properties/fbgroup.properties"))
 class Application

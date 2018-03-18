@@ -53,7 +53,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    public open fun socialUsersDetailService(): SocialUserDetailsService {
+    fun socialUsersDetailService(): SocialUserDetailsService {
         return SimpleSocialUsersDetailService(userDetailsService())
     }
 }

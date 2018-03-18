@@ -62,6 +62,7 @@ internal class StartDownloads : IStartDownloads, Runnable {
                 val creator = ContentHashCreator(p.createdTime, postLink, id)
                 val hashes = listOf(
                         creator.hash(p.message),
+                        creator.hash(p.story),
                         creator.hash(p.description),
                         creator.hash(p.link),
                         creator.image(p.picture)).filter { it != null }.map { it!! }

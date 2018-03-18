@@ -4,7 +4,6 @@ import org.fbgroups.entity.UserConnection
 import org.fbgroups.entity.UserConnectionRepository
 import org.fbgroups.entity.UserProfile
 import org.fbgroups.entity.UserProfileRepository
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.web.WebAttributes
 import org.springframework.stereotype.Component
@@ -47,7 +46,7 @@ class SocialControllerUtil {
             profile = getUserProfile(session, userId)
 
             // Compile the best display name from the connection and the profile
-            displayName = getDisplayName(connection, profile)
+            displayName = connection.displayname
 
         }
 
@@ -93,23 +92,9 @@ class SocialControllerUtil {
         return connection
     }
 
-    /**
-     * Compile the best display name from the connection and the profile
-     *
-     * @param connection
-     * @param profile
-     * @return
-     */
-    internal fun getDisplayName(connection: UserConnection?, profile: UserProfile?): String {
-
-        // The name is set differently in different providers so we better look in both places...
-        return connection!!.displayname ?: profile!!.name
-    }
-
-
     companion object {
 
-       private const val USER_CONNECTION = "MY_USER_CONNECTION"
+        private const val USER_CONNECTION = "MY_USER_CONNECTION"
         private const val USER_PROFILE = "MY_USER_PROFILE"
     }
 

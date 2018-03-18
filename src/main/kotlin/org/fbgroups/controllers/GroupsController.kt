@@ -8,10 +8,8 @@ import org.fbgroups.services.FbApiProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.facebook.api.Group
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
-import java.util.*
 
 @RestController
 internal class GroupsController {
@@ -33,7 +31,7 @@ internal class GroupsController {
         val taken = repo.findAll(ids).filter { it.userId != userId && it.status == FBGroupStatus.CHECKED }.toSet()
 
         val removed = stored.filter { it !in real }
-        val realWithStatuses = real.map{ g ->
+        val realWithStatuses = real.map { g ->
             when (g) {
                 in taken -> g.copy(status = FBGroupStatus.TAKEN)
                 in stored -> g.copy(status = FBGroupStatus.CHECKED)
@@ -41,16 +39,15 @@ internal class GroupsController {
             }
         }
 
-        return realWithStatuses+removed
+        return realWithStatuses + removed
     }
 
-    @RequestMapping("/group"    )
-    fun changeGroupStatus(id:String, manage:Boolean,currentUser: Principal ) {
+    @RequestMapping("/group")
+    fun changeGroupStatus(id: String, manage: Boolean, currentUser: Principal) {
         if (manage) {
             val api = apiProvider.getAPI(currentUser.name)
             val userId = api.userOperations().userProfile.id
-            val group = api.fetchConnections("me", "groups", Group::class.java).
-                    map { g -> FBGroup.fromGroup(g, userId, FBGroupStatus.CHECKED) }.filter{it.id == id}.first()
+            val group = api.fetchConnections("me", "groups", Group::class.java).map { g -> FBGroup.fromGroup(g, userId, FBGroupStatus.CHECKED) }.filter { it.id == id }.first()
             repo.save(group)
         } else repo.delete(id)
     }

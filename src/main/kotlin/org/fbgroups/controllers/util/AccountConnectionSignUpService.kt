@@ -1,17 +1,12 @@
 package org.fbgroups.controllers.util
 
 import org.fbgroups.entity.UserProfile
-import org.fbgroups.entity.UserRepository
-import org.fbgroups.services.IStartDownloads
-import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.social.connect.Connection
 import org.springframework.social.connect.ConnectionSignUp
 import org.springframework.social.facebook.api.Facebook
 import org.springframework.social.facebook.api.User
 import org.springframework.stereotype.Service
-
-import java.util.UUID
 
 /**
  * Spring calls this on first (!) user login

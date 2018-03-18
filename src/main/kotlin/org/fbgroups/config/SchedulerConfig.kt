@@ -12,7 +12,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar
 /**
  * Created by Pavel on 9/29/2015.
  */
-@Configuration
+//@Configuration
 @EnableScheduling
 class SchedulerConfig : SchedulingConfigurer {
 
