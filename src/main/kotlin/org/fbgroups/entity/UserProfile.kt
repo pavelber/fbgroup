@@ -12,7 +12,7 @@ import org.apache.tomcat.jni.User.username
  */
 @Entity
 @Table(name = "userprofile")
-data class UserProfile(@Id val userid: String, val name: String, val firstname: String, val lastname: String,
+data class UserProfile(@Id val userid: String, val name: String?, val firstname: String, val lastname: String,
                        val email: String, val username: String) {
 
 

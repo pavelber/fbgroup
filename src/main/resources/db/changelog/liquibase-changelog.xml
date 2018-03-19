@@ -112,4 +112,22 @@
             <column name="type" type="varchar(64)"/>
         </addColumn>
     </changeSet>
+    <changeSet id="create week statistics" author="Pavel">
+        <createTable tableName="week_statistics">
+            <column name="group_id" type="varchar(128)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="json" type="clob"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="json column to utf 8" author="pavel">
+        <sql>
+            ALTER TABLE week_statistics MODIFY json longtext CHARACTER SET utf8;
+        </sql>
+    </changeSet>
+    <changeSet id="add date columnt to stat" author="pavel">
+        <addColumn tableName="week_statistics">
+            <column name="date" type="timestamp" defaultValueDate="2018-03-19"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

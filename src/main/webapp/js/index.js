@@ -14,14 +14,21 @@ function createStatusHMTML(status,id){
     return '<input type="checkbox" '+defaultvalue+' onclick="manageGroup('+id+')" id="'+id+'">'
 }
 
+function createLink(status, id, file, text){
+    if (status === "TAKEN" || status === "CHECKED")
+        return '<A HREF="/'+file+'?groupId='+id+'">'+text+'</A>';
+    else return ''
+}
+
 $(document).ready(function () {
     let $groups = $("#groups-table");
 
     jQuery.getJSON("/groups" , function (groups) {
         groups.forEach(function (group) {
             $groups.append("<tr>" +
-                "<td><A HREF='/stat.html?groupId="+group.id+"'>" + group.name +"</A></td>" +
-                "<td><A HREF='/dupl.html?groupId="+group.id+"'> Duplicates </A></td>" +
+                "<td>"+group.name +"</td>" +
+                "<td>"+createLink(group.status, group.id, 'stat.html', 'Statistics') +"</td>" +
+                "<td>"+createLink(group.status, group.id, 'dupl.html', 'Duplicates') +"</td>" +
                 "<td>" + createStatusHMTML(group.status,group.id) +"</td>" +
                 "</tr>");
         });

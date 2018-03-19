@@ -1,6 +1,7 @@
 package org.fbgroups.config
 
 import org.fbgroups.services.IDuplicatesSearcher
+import org.fbgroups.services.ILikesReporter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,6 +21,9 @@ class SchedulerConfig : SchedulingConfigurer {
     @Autowired
     lateinit var duplicatesSearcher: IDuplicatesSearcher
 
+    @Autowired
+    lateinit var likesReporter: ILikesReporter
+
 
     @Bean
     fun taskScheduler(): ThreadPoolTaskScheduler {
@@ -32,11 +36,13 @@ class SchedulerConfig : SchedulingConfigurer {
     }
 
     override fun configureTasks(taskRegistrar: ScheduledTaskRegistrar) {
-        taskRegistrar.addFixedRateTask(duplicatesSearcher, PERIOD)
+        taskRegistrar.addFixedRateTask(duplicatesSearcher, DUPLICATES_PERIOD)
+        taskRegistrar.addFixedRateTask(likesReporter, LIKES_PERIOD)
     }
 
     companion object {
 
-        private val PERIOD = 60 * 60 * 1000L
+        private const val DUPLICATES_PERIOD = 60 * 60 * 1000L
+        private const val LIKES_PERIOD = 60 * 60 * 1000L
     }
 }

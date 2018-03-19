@@ -22,8 +22,8 @@ internal class GroupsController {
 
     @RequestMapping("/groups")
     fun getGroups(currentUser: Principal): List<FBGroup> {
-        val api = apiProvider.getAPI(currentUser.name)
-        val userId = api.userOperations().userProfile.id
+        val userId = currentUser.name
+        val api = apiProvider.getAPI(userId)
 
         val stored = repo.findByUserId(userId).toSet()
         val real = api.fetchConnections("me", "groups", Group::class.java).map { g -> FBGroup.fromGroup(g, userId) }.toSet()
@@ -46,7 +46,7 @@ internal class GroupsController {
     fun changeGroupStatus(id: String, manage: Boolean, currentUser: Principal) {
         if (manage) {
             val api = apiProvider.getAPI(currentUser.name)
-            val userId = api.userOperations().userProfile.id
+            val userId = currentUser.name
             val group = api.fetchConnections("me", "groups", Group::class.java).map { g -> FBGroup.fromGroup(g, userId, FBGroupStatus.CHECKED) }.filter { it.id == id }.first()
             repo.save(group)
         } else repo.delete(id)
