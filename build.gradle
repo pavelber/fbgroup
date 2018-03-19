@@ -107,5 +107,4 @@ compileTestKotlin {
 
 allOpen {
     annotation("org.springframework.context.annotation.Configuration")
-    // annotations("com.another.Annotation", "com.third.Annotation")
 }

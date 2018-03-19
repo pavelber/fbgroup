@@ -11,3 +11,7 @@ interface ContentHashRepository : JpaRepository<ContentHash, String> {
     @Query("SELECT h from ContentHash h where h.hash in  ?1")
     fun findByHashes(hashes: List<Int>): List<ContentHash>
 }
+
+interface DuplicatesRepository: JpaRepository<Duplicate, Long>{
+    fun findByGroupIdOrderByUrlDateDesc(groutpId: String): List<Duplicate>
+}

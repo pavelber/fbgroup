@@ -1,6 +1,6 @@
 package org.fbgroups.config
 
-import org.fbgroups.services.IStartDownloads
+import org.fbgroups.services.IDuplicatesSearcher
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,13 +12,13 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar
 /**
  * Created by Pavel on 9/29/2015.
  */
-//@Configuration
+@Configuration
 @EnableScheduling
 class SchedulerConfig : SchedulingConfigurer {
 
 
     @Autowired
-    lateinit var startDownloads: IStartDownloads
+    lateinit var duplicatesSearcher: IDuplicatesSearcher
 
 
     @Bean
@@ -32,11 +32,11 @@ class SchedulerConfig : SchedulingConfigurer {
     }
 
     override fun configureTasks(taskRegistrar: ScheduledTaskRegistrar) {
-        taskRegistrar.addFixedRateTask(startDownloads, PERIOD)
+        taskRegistrar.addFixedRateTask(duplicatesSearcher, PERIOD)
     }
 
     companion object {
 
-        private val PERIOD = 60 * 1 * 1000L
+        private val PERIOD = 60 * 60 * 1000L
     }
 }

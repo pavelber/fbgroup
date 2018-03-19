@@ -19,7 +19,11 @@ $(document).ready(function () {
 
     jQuery.getJSON("/groups" , function (groups) {
         groups.forEach(function (group) {
-            $groups.append("<tr><td><A HREF='/stat.html?groupId="+group.id+"'>" + group.name +"</A></td><td>" + createStatusHMTML(group.status,group.id) +"</td></tr>");
+            $groups.append("<tr>" +
+                "<td><A HREF='/stat.html?groupId="+group.id+"'>" + group.name +"</A></td>" +
+                "<td><A HREF='/dupl.html?groupId="+group.id+"'> Duplicates </A></td>" +
+                "<td>" + createStatusHMTML(group.status,group.id) +"</td>" +
+                "</tr>");
         });
         
     });

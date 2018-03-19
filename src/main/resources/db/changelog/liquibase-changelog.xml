@@ -95,4 +95,21 @@
             <column name="link" type="varchar(512)"/>
         </createTable>
     </changeSet>
+    <changeSet id="create duplicate table" author="Pavel">
+        <createTable tableName="duplicate">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url_date" type="timestamp"/>
+            <column name="original_date" type="timestamp"/>
+            <column name="group_id" type="varchar(255)"/>
+            <column name="url" type="varchar(512)"/>
+            <column name="original" type="varchar(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add hash type" author="Pavel">
+        <addColumn tableName="content_hash">
+            <column name="type" type="varchar(64)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
